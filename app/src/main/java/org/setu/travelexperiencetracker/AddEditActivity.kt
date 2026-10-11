@@ -1,10 +1,9 @@
 package org.setu.travelexperiencetracker
 
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
@@ -24,85 +23,63 @@ class AddEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        createUserInterface()
+        setContentView(R.layout.activity_add_edit)
 
-        editingId = intent.getLongExtra("id", -1L)
+        titleInput =
+            findViewById(R.id.titleInput)
 
-        if (editingId != -1L) {
+        descriptionInput =
+            findViewById(R.id.descriptionInput)
+
+        countryInput =
+            findViewById(R.id.countryInput)
+
+        cityInput =
+            findViewById(R.id.cityInput)
+
+        typeInput =
+            findViewById(R.id.typeInput)
+
+        dateVisitedInput =
+            findViewById(R.id.dateVisitedInput)
+
+        ratingInput =
+            findViewById(R.id.ratingInput)
+
+        val saveButton =
+            findViewById<Button>(R.id.saveButton)
+
+        val cancelButton =
+            findViewById<Button>(R.id.cancelButton)
+
+        editingId =
+            intent.getLongExtra("id", -1L)
+                .takeIf { it != -1L }
+
+        if (editingId != null) {
+
+            findViewById<TextView>(R.id.formTitle)
+                .text = "Edit Travel Experience"
+
             loadExistingExperience(editingId!!)
         }
-    }
 
-    private fun createUserInterface() {
-
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(32, 320, 32, 32)
+        saveButton.setOnClickListener {
+            saveExperience()
         }
 
-        titleInput = EditText(this).apply {
-            hint = "Title"
+        cancelButton.setOnClickListener {
+            finish()
         }
-
-        descriptionInput = EditText(this).apply {
-            hint = "Description"
-        }
-
-        countryInput = EditText(this).apply {
-            hint = "Country"
-        }
-
-        cityInput = EditText(this).apply {
-            hint = "City"
-        }
-
-        typeInput = EditText(this).apply {
-            hint = "Type (Landmark, Restaurant or Activity)"
-        }
-
-        dateVisitedInput = EditText(this).apply {
-            hint = "Date Visited (DD/MM/YYYY)"
-        }
-
-        ratingInput = EditText(this).apply {
-            hint = "Rating (1-5)"
-            inputType = InputType.TYPE_CLASS_NUMBER
-        }
-
-        val saveButton = Button(this).apply {
-            text = "Save"
-
-            setOnClickListener {
-                saveExperience()
-            }
-        }
-
-        val cancelButton = Button(this).apply {
-            text = "Cancel"
-
-            setOnClickListener {
-                finish()
-            }
-        }
-
-        root.addView(titleInput)
-        root.addView(descriptionInput)
-        root.addView(countryInput)
-        root.addView(cityInput)
-        root.addView(typeInput)
-        root.addView(dateVisitedInput)
-        root.addView(ratingInput)
-        root.addView(saveButton)
-        root.addView(cancelButton)
-
-        setContentView(root)
     }
 
     private fun loadExistingExperience(id: Long) {
 
-        val experience = AppData.experiences.findOne(id)
+        val experience =
+            AppData.experiences.findOne(id)
 
         if (experience == null) {
+
             Toast.makeText(
                 this,
                 "Travel experience not found",
@@ -124,26 +101,38 @@ class AddEditActivity : AppCompatActivity() {
 
     private fun saveExperience() {
 
-        val title = titleInput.text.toString().trim()
-        val description = descriptionInput.text.toString().trim()
-        val country = countryInput.text.toString().trim()
-        val city = cityInput.text.toString().trim()
-        val type = typeInput.text.toString().trim()
-        val dateVisited = dateVisitedInput.text.toString().trim()
+        val title =
+            titleInput.text.toString().trim()
+
+        val description =
+            descriptionInput.text.toString().trim()
 
         if (title.isEmpty()) {
             titleInput.error = "Title is required"
             return
         }
 
-        val rating = ratingInput.text.toString().toIntOrNull()
+        val country =
+            countryInput.text.toString().trim()
+
+        val city =
+            cityInput.text.toString().trim()
+
+        val type =
+            typeInput.text.toString().trim()
+
+        val dateVisited =
+            dateVisitedInput.text.toString().trim()
+
+        val rating =
+            ratingInput.text.toString().toIntOrNull()
 
         if (rating == null) {
             ratingInput.error = "Enter a valid number"
             return
         }
 
-        if (editingId == null || editingId == -1L) {
+        if (editingId == null) {
 
             val experience = TravelExperienceModel(
                 title = title,
