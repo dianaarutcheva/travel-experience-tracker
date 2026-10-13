@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFF8F5"
         android:orientation="vertical"
+        android:padding="24dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -18,7 +20,9 @@
             android:id="@+id/experiencesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="Travel Experiences"
+            android:textColor="#202124"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -31,7 +35,14 @@
         <Button
             android:id="@+id/returnButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back to menu" />
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FFF8F5"
+            android:text="Back to menu"
+            android:textColor="#B32635"
+            android:textSize="18sp"
+            app:cornerRadius="8dp"
+            app:strokeColor="#B32635"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

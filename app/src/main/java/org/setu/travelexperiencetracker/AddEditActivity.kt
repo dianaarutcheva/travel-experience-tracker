@@ -7,6 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
+// For calendar picker
+import android.app.DatePickerDialog
+import java.util.Calendar
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -42,6 +45,30 @@ class AddEditActivity : AppCompatActivity() {
 
         dateVisitedInput =
             findViewById(R.id.dateVisitedInput)
+
+        // Open a calendar instead of letting the user type a date.
+        dateVisitedInput.isFocusable = false
+
+        dateVisitedInput.setOnClickListener {
+            val calendar = Calendar.getInstance()  // Use today's date as the starting date.
+
+            DatePickerDialog(
+                this,
+                { _, year, month, day ->
+                    // Format the selected date as DD/MM/YYYY.
+                    // Add 1 because Android counts months from 0.
+                    val selectedDate =
+                        "%02d/%02d/%04d".format(day, month + 1, year) //%02d gives the day and month two digits, %04d gives the year four digits.
+
+                    // Display the selected date in the form.
+                    dateVisitedInput.setText(selectedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()  // Display the date picker.
+        }
+
 
         ratingInput =
             findViewById(R.id.ratingInput)
