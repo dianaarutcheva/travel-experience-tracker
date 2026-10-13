@@ -10,8 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFF8F5"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="24dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -19,22 +21,42 @@
             android:id="@+id/mainTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Travel Experiences"
+            android:gravity="center"
+            android:text="Travel Experience Tracker"
+            android:textColor="#202124"
             android:textSize="32sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/menuSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Keep your travel memories together"
+            android:textColor="#656168"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/viewExperiencesButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="View Experiences" />
+            android:layout_height="56dp"
+            android:layout_marginTop="48dp"
+            android:backgroundTint="#B32635"
+            android:text="View Experiences"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/addExperienceButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:text="Add Experience" />
+            android:backgroundTint="#FFF8F5"
+            android:text="Add Experience"
+            android:textColor="#B32635"
+            android:textSize="18sp"
+            app:strokeColor="#B32635"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

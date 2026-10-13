@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#FFF8F5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,78 +15,237 @@
             android:id="@+id/formTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="Add Travel Experience"
+            android:textColor="#202124"
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/titleInput"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
             android:hint="Title"
-            android:inputType="text" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/descriptionInput"
+            <EditText
+                android:id="@+id/titleInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:hint="Title"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Description "
-            android:inputType="text|textMultiLine"
-            android:minLines="3" />
+            android:layout_marginBottom="12dp"
+            android:hint="Description"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/countryInput"
+            <EditText
+                android:id="@+id/descriptionInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:hint="Description "
+                android:inputType="text|textMultiLine"
+                android:minLines="3"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginBottom="12dp"
             android:hint="Country"
-            android:inputType="text" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/cityInput"
+            <EditText
+                android:id="@+id/countryInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:hint="Country"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginBottom="12dp"
             android:hint="City"
-            android:inputType="text" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/typeInput"
+            <EditText
+                android:id="@+id/cityInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:hint="City"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginBottom="12dp"
             android:hint="Type (Landmark, Restaurant or Activity)"
-            android:inputType="text" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/dateVisitedInput"
+            <EditText
+                android:id="@+id/typeInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:hint="Type (Landmark, Restaurant or Activity)"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginBottom="12dp"
             android:hint="Date Visited (DD/MM/YYYY)"
-            android:inputType="date" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
 
-        <EditText
-            android:id="@+id/ratingInput"
+            <EditText
+                android:id="@+id/dateVisitedInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:inputType="date"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Rating (1-5)"
-            android:inputType="number" />
+            android:layout_marginBottom="12dp"
+            android:hint="Rating (1–5)"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#B32635">
+
+            <EditText
+                android:id="@+id/ratingInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:backgroundTint="#B32635"
+                android:ems="10"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="#202124"
+                android:textColorHint="#656168"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save" />
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#B32635"
+            android:text="Save"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:cornerRadius="8dp" />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FFF8F5"
+            android:text="Cancel"
+            android:textColor="#B32635"
+            android:textSize="18sp"
+            app:cornerRadius="8dp"
+            app:strokeColor="#B32635"
+            app:strokeWidth="1dp" />
 
     </LinearLayout>
 </ScrollView>

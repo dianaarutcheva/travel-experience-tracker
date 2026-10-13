@@ -61,8 +61,9 @@ class TravelExperienceAdapter(
         holder.descriptionText.text =
             experience.description
 
+        //Each \n starts a new line
         holder.locationText.text =
-            "Country: ${experience.country}, City: ${experience.city} | Type: ${experience.type} | Date: ${experience.dateVisited} | Rating: ${experience.rating}/5"
+            "Country: ${experience.country}\nCity: ${experience.city}\nType: ${experience.type}\nDate: ${experience.dateVisited}\nRating: ${experience.rating}/5"
 
         holder.editButton.setOnClickListener {
             onEdit(experience)
