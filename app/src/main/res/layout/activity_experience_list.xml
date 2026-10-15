@@ -16,6 +16,8 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+
+        <!-- Heading for the experience list. -->
         <TextView
             android:id="@+id/experiencesTitle"
             android:layout_width="match_parent"
@@ -27,9 +29,9 @@
             android:textStyle="bold" />
 
 
-
-
-        <!-- Search box below the heading and above the list. -->
+        <!-- SEARCH -->
+        <!-- Create the border and label around the search input -->
+        <!-- Show "Search experiences..." as the label -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +45,9 @@
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusBottomEnd="8dp">
 
-            <!-- Enter all or part of an experience name. -->
+            <!-- Text field where the user types an experience name -->
+            <!-- searchInput is the ID used to find this field in Kotlin -->
+            <!-- inputType="text" allows text entry using the keyboard -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchInput"
                 android:layout_width="match_parent"
@@ -58,13 +62,15 @@
 
 
 
-
+        <!-- Show the experiences below the search box. -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/experiencesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+
+        <!-- Return to the main menu. -->
         <Button
             android:id="@+id/returnButton"
             android:layout_width="match_parent"

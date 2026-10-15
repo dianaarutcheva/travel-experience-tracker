@@ -7,11 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
-// Import the dropdown field used to select the experience type
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-// For calendar picker
-import android.app.DatePickerDialog
-import java.util.Calendar
+import com.google.android.material.textfield.MaterialAutoCompleteTextView  // Used for the Type dropdown field.
+import android.app.DatePickerDialog  // Used to display the calendar picker.
+import java.util.Calendar  // Used to get today's date.
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -20,12 +18,13 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var countryInput: EditText
     private lateinit var cityInput: EditText
 
-    // The Type field now uses a dropdown.
+    // Reference to the Type dropdown
     private lateinit var typeInput: MaterialAutoCompleteTextView
     private lateinit var dateVisitedInput: EditText
     private lateinit var ratingInput: EditText
 
     private var editingId: Long? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,18 +43,25 @@ class AddEditActivity : AppCompatActivity() {
         cityInput =
             findViewById(R.id.cityInput)
 
+       // Connect to the Type field in the layout
         typeInput =
             findViewById(R.id.typeInput)
 
-        // Provide the three choices for the Type dropdown.
+        // Set the three choices available in the dropdown
         val experienceTypes = arrayOf("Landmark", "Restaurant", "Activity")
         typeInput.setSimpleItems(experienceTypes)
 
-        // Show the choices when the field is tapped.
+        //Show the choices when the user taps Type.
         typeInput.setOnClickListener {
             typeInput.showDropDown()
         }
 
+
+
+
+
+
+        // CALENDAR
         dateVisitedInput =
             findViewById(R.id.dateVisitedInput)
 
@@ -63,7 +69,7 @@ class AddEditActivity : AppCompatActivity() {
         dateVisitedInput.isFocusable = false
 
         dateVisitedInput.setOnClickListener {
-            val calendar = Calendar.getInstance()  // Use today's date as the starting date.
+            val calendar = Calendar.getInstance()  // Use today's date as the starting date
 
             DatePickerDialog(
                 this,
@@ -134,7 +140,7 @@ class AddEditActivity : AppCompatActivity() {
         descriptionInput.setText(experience.description)
         countryInput.setText(experience.country)
         cityInput.setText(experience.city)
-        // Show the saved type without filtering the dropdown choices.
+        // Put the experience's saved type into the Type box
         typeInput.setText(experience.type, false)
         dateVisitedInput.setText(experience.dateVisited)
         ratingInput.setText(experience.rating.toString())

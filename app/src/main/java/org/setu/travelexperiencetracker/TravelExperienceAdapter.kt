@@ -23,7 +23,8 @@ class TravelExperienceAdapter(
         val descriptionText: TextView =
             itemView.findViewById(R.id.descriptionText)
 
-        // Connect each detail to its TextView.
+        // First section finds the text boxes
+        // Find the text boxes for country, city, type, date and rating in the layout
         val countryText: TextView = itemView.findViewById(R.id.countryText)
         val cityText: TextView = itemView.findViewById(R.id.cityText)
         val typeText: TextView = itemView.findViewById(R.id.typeText)
@@ -65,7 +66,9 @@ class TravelExperienceAdapter(
         holder.descriptionText.text =
             experience.description
 
-        // Display each detail beside its icon.
+        // Second section puts the details into the text boxes
+        // Fill each text box with this experience's details.
+        // Each box already has its icon set in the XML layout.
         holder.countryText.text = "Country: ${experience.country}"
         holder.cityText.text = "City: ${experience.city}"
         holder.typeText.text = "Type: ${experience.type}"

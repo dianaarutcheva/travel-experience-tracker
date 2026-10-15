@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Add a travel experience page -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,6 +12,8 @@
         android:orientation="vertical"
         android:padding="32dp">
 
+
+        <!-- Heading for the add or edit form -->
         <TextView
             android:id="@+id/formTitle"
             android:layout_width="match_parent"
@@ -21,6 +24,9 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+
+        <!-- The Title label moves above the text when the field is used -->
+        <!-- Red for the floating label -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,6 +40,9 @@
             app:boxStrokeColor="#B32635"
             app:hintTextColor="#B32635">
 
+
+            <!-- Enter the experience title. -->
+            <!-- background="@null": remove the default underline. -->
             <EditText
                 android:id="@+id/titleInput"
                 android:layout_width="match_parent"
@@ -59,6 +68,8 @@
             app:boxStrokeColor="#B32635"
             app:hintTextColor="#B32635">
 
+
+            <!-- Allow the description to span multiple lines. -->
             <EditText
                 android:id="@+id/descriptionInput"
                 android:layout_width="match_parent"
@@ -137,6 +148,8 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- Type dropdown with a red arrow on the right -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,6 +179,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- Date Visited field with a red calendar icon at the start. -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,6 +196,8 @@
             app:startIconDrawable="@drawable/calendar_icon"
             app:startIconTint="#B32635">
 
+
+            <!-- Display the date chosen using the calendar picker. -->
             <EditText
                 android:id="@+id/dateVisitedInput"
                 android:layout_width="match_parent"
@@ -226,6 +243,8 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- Save the new or edited experience. -->
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
@@ -237,6 +256,8 @@
             android:textSize="18sp"
             app:cornerRadius="8dp" />
 
+
+        <!-- Return without saving changes. -->
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
