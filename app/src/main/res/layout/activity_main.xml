@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Main menu -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,6 +18,8 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+
+        <!-- Main heading introducing the app. -->
         <TextView
             android:id="@+id/mainTitle"
             android:layout_width="match_parent"
@@ -27,6 +30,8 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
+
+        <!-- Short description below the heading. -->
         <TextView
             android:id="@+id/menuSubtitle"
             android:layout_width="match_parent"
@@ -37,6 +42,8 @@
             android:textColor="#656168"
             android:textSize="16sp" />
 
+
+        <!-- Airplane icon -->
         <ImageView
             android:id="@+id/airplaneIcon"
             android:layout_width="120dp"
@@ -46,6 +53,8 @@
             android:layout_marginBottom="24dp"
             app:srcCompat="@drawable/airplane_icon" />
 
+
+        <!-- View list of saved travel experiences. -->
         <Button
             android:id="@+id/viewExperiencesButton"
             android:layout_width="match_parent"
@@ -56,6 +65,8 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
+
+        <!-- Open the form to add a travel experience -->
         <Button
             android:id="@+id/addExperienceButton"
             android:layout_width="match_parent"
