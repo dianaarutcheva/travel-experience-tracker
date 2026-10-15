@@ -7,6 +7,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
+// Import the dropdown field used to select the experience type
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 // For calendar picker
 import android.app.DatePickerDialog
 import java.util.Calendar
@@ -17,7 +19,9 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var descriptionInput: EditText
     private lateinit var countryInput: EditText
     private lateinit var cityInput: EditText
-    private lateinit var typeInput: EditText
+
+    // The Type field now uses a dropdown.
+    private lateinit var typeInput: MaterialAutoCompleteTextView
     private lateinit var dateVisitedInput: EditText
     private lateinit var ratingInput: EditText
 
@@ -42,6 +46,15 @@ class AddEditActivity : AppCompatActivity() {
 
         typeInput =
             findViewById(R.id.typeInput)
+
+        // Provide the three choices for the Type dropdown.
+        val experienceTypes = arrayOf("Landmark", "Restaurant", "Activity")
+        typeInput.setSimpleItems(experienceTypes)
+
+        // Show the choices when the field is tapped.
+        typeInput.setOnClickListener {
+            typeInput.showDropDown()
+        }
 
         dateVisitedInput =
             findViewById(R.id.dateVisitedInput)
@@ -121,7 +134,8 @@ class AddEditActivity : AppCompatActivity() {
         descriptionInput.setText(experience.description)
         countryInput.setText(experience.country)
         cityInput.setText(experience.city)
-        typeInput.setText(experience.type)
+        // Show the saved type without filtering the dropdown choices.
+        typeInput.setText(experience.type, false)
         dateVisitedInput.setText(experience.dateVisited)
         ratingInput.setText(experience.rating.toString())
     }
