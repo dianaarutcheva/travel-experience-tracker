@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:background="#FFFFFF"
+    android:background="#FFF8F5"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -25,11 +25,68 @@
         android:textColor="#656168"
         android:textSize="16sp" />
 
+    <!-- Each detail has its own icon and text. -->
+
+    <!-- Country details with a flag icon -->
     <TextView
-        android:id="@+id/locationText"
+        android:id="@+id/countryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/country_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#202124"
+        android:textSize="14sp" />
+
+
+    <!-- City details with a location icon. -->
+    <TextView
+        android:id="@+id/cityText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/city_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#202124"
+        android:textSize="14sp" />
+
+    <!-- Experience type with a category icon. -->
+    <TextView
+        android:id="@+id/typeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/type_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#202124"
+        android:textSize="14sp" />
+
+
+    <!-- Date visited with a calendar icon. -->
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/calendar_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#202124"
+        android:textSize="14sp" />
+
+
+    <!-- Rating out of five with a star icon. -->
+    <TextView
+        android:id="@+id/ratingText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:drawableStart="@drawable/rating_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
         android:textColor="#202124"
         android:textSize="14sp" />
 
@@ -41,7 +98,10 @@
         android:text="Edit"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:cornerRadius="8dp" />
+        app:cornerRadius="8dp"
+        app:icon="@drawable/edit_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp" />
 
     <Button
         android:id="@+id/deleteButton"
@@ -52,6 +112,11 @@
         android:textColor="#B32635"
         android:textSize="16sp"
         app:cornerRadius="8dp"
+        app:icon="@drawable/delete_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconSize="20dp"
+        app:iconTint="#B32635"
         app:strokeColor="#B32635"
         app:strokeWidth="1dp" />
 </LinearLayout>

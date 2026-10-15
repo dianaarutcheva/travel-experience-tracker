@@ -37,6 +37,15 @@
             android:textColor="#656168"
             android:textSize="16sp" />
 
+        <ImageView
+            android:id="@+id/airplaneIcon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:srcCompat="@drawable/airplane_icon" />
+
         <Button
             android:id="@+id/viewExperiencesButton"
             android:layout_width="match_parent"
