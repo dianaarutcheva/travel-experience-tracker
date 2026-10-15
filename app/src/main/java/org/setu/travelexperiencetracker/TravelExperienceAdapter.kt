@@ -23,8 +23,12 @@ class TravelExperienceAdapter(
         val descriptionText: TextView =
             itemView.findViewById(R.id.descriptionText)
 
-        val locationText: TextView =
-            itemView.findViewById(R.id.locationText)
+        // Connect each detail to its TextView.
+        val countryText: TextView = itemView.findViewById(R.id.countryText)
+        val cityText: TextView = itemView.findViewById(R.id.cityText)
+        val typeText: TextView = itemView.findViewById(R.id.typeText)
+        val dateText: TextView = itemView.findViewById(R.id.dateText)
+        val ratingText: TextView = itemView.findViewById(R.id.ratingText)
 
         val editButton: Button =
             itemView.findViewById(R.id.editButton)
@@ -61,9 +65,12 @@ class TravelExperienceAdapter(
         holder.descriptionText.text =
             experience.description
 
-        //Each \n starts a new line
-        holder.locationText.text =
-            "Country: ${experience.country}\nCity: ${experience.city}\nType: ${experience.type}\nDate: ${experience.dateVisited}\nRating: ${experience.rating}/5"
+        // Display each detail beside its icon.
+        holder.countryText.text = "Country: ${experience.country}"
+        holder.cityText.text = "City: ${experience.city}"
+        holder.typeText.text = "Type: ${experience.type}"
+        holder.dateText.text = "Date: ${experience.dateVisited}"
+        holder.ratingText.text = "Rating: ${experience.rating}/5"
 
         holder.editButton.setOnClickListener {
             onEdit(experience)
