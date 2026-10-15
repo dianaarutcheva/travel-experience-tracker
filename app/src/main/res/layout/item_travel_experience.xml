@@ -118,5 +118,5 @@
         app:iconSize="20dp"
         app:iconTint="#B32635"
         app:strokeColor="#B32635"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="2dp" />
 </LinearLayout>
