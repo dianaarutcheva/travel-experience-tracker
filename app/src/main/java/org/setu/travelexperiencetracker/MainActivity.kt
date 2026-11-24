@@ -7,11 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import timber.log.Timber
 
+// Controls the main menu screen
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Timber.forest().isEmpty()) {
+            Timber.plant(Timber.DebugTree())
+        }
+        Timber.d("Main menu opened")
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
@@ -21,10 +27,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val viewExperiencesButton =
+        val viewExperiencesButton =  // Find the View Experiences button
             findViewById<Button>(R.id.viewExperiencesButton)
 
-        val addExperienceButton =
+        val addExperienceButton =  // Find the Add Experience button
             findViewById<Button>(R.id.addExperienceButton)
 
         viewExperiencesButton.setOnClickListener {
@@ -33,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+        // Open an empty form when Add Experience is clicked
         addExperienceButton.setOnClickListener {
             startActivity(
                 Intent(this, AddEditActivity::class.java)
