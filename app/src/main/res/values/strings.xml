@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Travel Experience Tracker</string>
+    <string name="delete_experience_title">Delete this experience?</string>
+    <string name="delete_experience_message">Remove %1$s from your travel experiences?</string>
+    <string name="delete_experience_action">Delete</string>
 </resources>

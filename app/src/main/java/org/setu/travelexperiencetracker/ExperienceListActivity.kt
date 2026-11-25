@@ -7,41 +7,49 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
-import android.widget.EditText  // Access the search text field.
+import androidx.appcompat.app.AlertDialog
+import timber.log.Timber
+
+
+// SEARCH imports
+import android.widget.EditText  // Access the search text field
 import androidx.core.widget.doAfterTextChanged // Detect when the user changes the search text
 
-class ExperienceListActivity : AppCompatActivity() {
 
+// Controls the screen that displays, searches, edits and deletes experiences.
+class ExperienceListActivity : AppCompatActivity(), OnExperienceListener {
+
+    // Displays the scrolling list
     private lateinit var recyclerView: RecyclerView
+
+    // Puts each experience's details into the scrolling list
     private lateinit var adapter: TravelExperienceAdapter
 
     // Used to access the search box and read what the user types
     private lateinit var searchInput: EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
+    // SEARCH
+    // Set up the screen's layout, list, search box and buttons
+    override fun onCreate(savedInstanceState: Bundle?) { // Bundle is a container for holding information
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_experience_list)
+        setContentView(R.layout.activity_experience_list) // Show XML design
 
         recyclerView =
-            findViewById(R.id.experiencesRecyclerView)
+            findViewById(R.id.experiencesRecyclerView) // Find the scrolling list
 
         adapter = TravelExperienceAdapter(
             experiences = AppData.experiences.findAll(),
-
-            onEdit = { experience ->
-                editExperience(experience)
-            },
-
-            onDelete = { experience ->
-                deleteExperience(experience)
-            }
+            listener = this
         )
 
-        recyclerView.layoutManager =
+        recyclerView.layoutManager =             // Show experiences one below another
             LinearLayoutManager(this)
 
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter    // Connect the adapter to the scrolling list
 
         // Find the search box in activity_experience_list.xml
         searchInput = findViewById(R.id.searchInput)
@@ -52,11 +60,10 @@ class ExperienceListActivity : AppCompatActivity() {
         }
 
 
-
         val returnButton =
-            findViewById<Button>(R.id.returnButton)
+            findViewById<Button>(R.id.returnButton) // Back to menu
 
-        returnButton.setOnClickListener {
+        returnButton.setOnClickListener {  // Open the main menu when the button is clicked
 
             startActivity(
                 Intent(this, MainActivity::class.java)
@@ -64,11 +71,12 @@ class ExperienceListActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
+
+
+    override fun onResume() {  // Refresh the list when screen becomes active
         super.onResume()
 
-        // Only search after the adapter and search box are ready
-
+        // Check that the adapter and search box are both ready to use
         if (::adapter.isInitialized && ::searchInput.isInitialized) {
             // Use the current search text when refreshing the list
             filterExperiences()
@@ -85,7 +93,7 @@ class ExperienceListActivity : AppCompatActivity() {
         // trim() removes spaces from the beginning and end
         val searchText = searchInput.text.toString().trim()
 
-        // Start with all experiences so each search checks the full list.
+        // Start with all experiences so each search checks the full list
         val matches = AppData.experiences.findAll().filter {
             // Keep an experience if its title contains the search text
             // For example, "uff" matches "Uffizi Gallery"
@@ -99,13 +107,38 @@ class ExperienceListActivity : AppCompatActivity() {
     }
 
 
+    override fun onExperienceClick(experience: TravelExperienceModel) {
+        Timber.d("Opening experience for edit, id=%s", experience.id)
+        editExperience(experience)
+    }
+
+    override fun onExperienceLongClick(experience: TravelExperienceModel): Boolean {
+        Timber.d("Showing delete confirmation, id=%s", experience.id)
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.delete_experience_title)
+            .setMessage(getString(R.string.delete_experience_message, experience.title))
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(R.string.delete_experience_action) { _, _ ->
+                Timber.d("Delete confirmed, id=%s", experience.id)
+                deleteExperience(experience)
+            }
+            .show()
+
+        return true
+    }
+
+
+
+
 
 
     private fun editExperience(experience: TravelExperienceModel) {
 
-        val intent =
+        val intent =  // Prepare to open the add/edit screen
             Intent(this, AddEditActivity::class.java)
 
+        // Send the ID of the experience to edit.
         intent.putExtra("id", experience.id)
 
         startActivity(intent)
@@ -118,8 +151,7 @@ class ExperienceListActivity : AppCompatActivity() {
         // Delete the selected experience using its ID
         AppData.experiences.delete(experience.id)
 
-        // Update the search results so the deleted entry disappears
-        // Keep the user's current search applied
+        // Refresh the list so it no longer shows the deleted experience
         filterExperiences()
     }
 }
