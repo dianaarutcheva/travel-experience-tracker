@@ -46,7 +46,7 @@
             app:boxCornerRadiusBottomEnd="8dp">
 
             <!-- Text field where the user types an experience name -->
-            <!-- searchInput is the ID used to find this field in Kotlin -->
+            <!-- searchInput is the ID used to find this field -->
             <!-- inputType="text" allows text entry using the keyboard -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchInput"

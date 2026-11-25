@@ -16,6 +16,7 @@ class TravelExperienceMemStore {
 
 
     fun create(experience: TravelExperienceModel) { // Gives the experience a new ID and adds it to the list
+        experience.validate()
         experience.id = lastId.incrementAndGet()
         experiences.add(experience)
     }
@@ -24,6 +25,7 @@ class TravelExperienceMemStore {
 
 
     fun update(experience: TravelExperienceModel): Boolean {  // Finds the existing experience by ID and changes its details
+        experience.validate()
         val foundExperience = findOne(experience.id)
         return if (foundExperience != null) {
             foundExperience.title = experience.title
@@ -33,6 +35,9 @@ class TravelExperienceMemStore {
             foundExperience.type = experience.type
             foundExperience.dateVisited = experience.dateVisited
             foundExperience.rating = experience.rating
+            foundExperience.latitude = experience.latitude
+            foundExperience.longitude = experience.longitude
+            foundExperience.imageUri = experience.imageUri
             true
         } else {
             false

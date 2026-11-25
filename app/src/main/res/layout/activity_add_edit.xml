@@ -25,7 +25,6 @@
             android:textStyle="bold" />
 
 
-        <!-- The Title label moves above the text when the field is used -->
         <!-- Red for the floating label -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -242,6 +241,38 @@
                 android:textColorHint="#656168"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
+
+
+        <EditText
+            android:id="@+id/latitudeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/latitude_hint"
+            android:inputType="numberDecimal|numberSigned" />
+
+        <EditText
+            android:id="@+id/longitudeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/longitude_hint"
+            android:inputType="numberDecimal|numberSigned" />
+
+
+
+        <ImageView
+            android:id="@+id/experienceImagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/experience_photo_preview"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <Button
+            android:id="@+id/pickExperienceImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_experience_photo" />
 
 
         <!-- Save the new or edited experience. -->

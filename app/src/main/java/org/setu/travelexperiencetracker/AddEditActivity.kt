@@ -12,6 +12,9 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView  //  T
 import android.app.DatePickerDialog  // Used to display the calendar picker
 import java.util.Calendar  // Used to get today's date
 import timber.log.Timber
+import android.net.Uri
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -26,8 +29,30 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var dateVisitedInput: EditText
     private lateinit var ratingInput: EditText
 
+    private lateinit var latitudeInput: EditText
+    private lateinit var longitudeInput: EditText
     private var editingId: Long? = null
 
+
+    private lateinit var imagePreview: ImageView
+    private var selectedImageUri: Uri? = null
+
+    private val imagePicker =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) {
+                try {
+                    contentResolver.takePersistableUriPermission(
+                        uri,
+                        android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (_: SecurityException) {
+                    // Some providers don't allow persistent access.
+                }
+
+                selectedImageUri = uri
+                imagePreview.setImageURI(uri)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {  // Sets up the screen when Android creates it
         super.onCreate(savedInstanceState)
@@ -38,6 +63,16 @@ class AddEditActivity : AppCompatActivity() {
             Timber.d("Opened experience form in add mode")
         }
         setContentView(R.layout.activity_add_edit) // Chooses the XML layout to display
+
+
+        imagePreview = findViewById(R.id.experienceImagePreview)
+        latitudeInput = findViewById(R.id.latitudeInput)
+        longitudeInput = findViewById(R.id.longitudeInput)
+
+        findViewById<Button>(R.id.pickExperienceImageButton).setOnClickListener {
+            imagePicker.launch(arrayOf("image/*"))
+        }
+
 
         titleInput =
             findViewById(R.id.titleInput)
@@ -55,17 +90,17 @@ class AddEditActivity : AppCompatActivity() {
             findViewById(R.id.typeInput)
 
 
-        val experienceTypes = arrayOf("Landmark", "Restaurant", "Activity") // Lets the user choose Landmark, Restaurant or Activity
+        val experienceTypes = arrayOf(
+            "Landmark",
+            "Restaurant",
+            "Activity"
+        ) // Lets the user choose Landmark, Restaurant or Activity
         typeInput.setSimpleItems(experienceTypes)  //puts those choices into the Type dropdown
 
         //Show the choices when the user taps Type
         typeInput.setOnClickListener {
             typeInput.showDropDown()  //opens the list of choices
         }
-
-
-
-
 
 
         // CALENDAR - opens a date picker and puts the chosen date into the date field
@@ -94,10 +129,6 @@ class AddEditActivity : AppCompatActivity() {
                 calendar.get(Calendar.DAY_OF_MONTH)   // Start on today's day
             ).show()  // Display the date picker.
         }
-
-
-
-
 
 
 // find rating box, save button and cancel button in the layout
@@ -163,10 +194,18 @@ class AddEditActivity : AppCompatActivity() {
         typeInput.setText(experience.type, false)
         dateVisitedInput.setText(experience.dateVisited)
         ratingInput.setText(experience.rating.toString())
+        latitudeInput.setText(experience.latitude.toString())
+        longitudeInput.setText(experience.longitude.toString())
+
+        selectedImageUri = experience.imageUri?.let { Uri.parse(it) }
+
+        val savedImageUri = selectedImageUri
+        if (savedImageUri != null) {
+            imagePreview.setImageURI(savedImageUri)
+        } else {
+            imagePreview.setImageResource(android.R.drawable.ic_menu_gallery)
+        }
     }
-
-
-
 
 
     // Read the form, check the title and rating, then save the experience
@@ -197,55 +236,47 @@ class AddEditActivity : AppCompatActivity() {
             dateVisitedInput.text.toString().trim()
 
         val rating =
-            ratingInput.text.toString().toIntOrNull()   // Change the rating to a whole number so it can be stored
+            ratingInput.text.toString()
+                .toIntOrNull()   // Change the rating to a whole number so it can be stored
 
         if (rating == null) {
             ratingInput.error = "Enter a valid number"
             return
         }
 
-        if (editingId == null) {   // No ID = adding a new experience
 
+        try {
             val experience = TravelExperienceModel(
+                id = editingId ?: 0L,
                 title = title,
                 description = description,
                 country = country,
                 city = city,
                 type = type,
                 dateVisited = dateVisited,
-                rating = rating
+                rating = rating,
+                latitude = latitudeInput.text.toString().toDouble(),
+                longitude = longitudeInput.text.toString().toDouble(),
+                imageUri = selectedImageUri?.toString()
             )
 
-            AppData.experiences.create(experience) // Add the new experience to the list
+            experience.validate()
 
+            if (editingId == null) {
+                AppData.experiences.create(experience)
+                Toast.makeText(this, "Travel experience created", Toast.LENGTH_SHORT).show()
+            } else {
+                AppData.experiences.update(experience)
+                Toast.makeText(this, "Travel experience updated", Toast.LENGTH_SHORT).show()
+            }
+
+            finish()
+        } catch (e: IllegalArgumentException) {
             Toast.makeText(
                 this,
-                "Travel experience created",
-                Toast.LENGTH_SHORT
-            ).show()
-
-        } else {   //ID is present so update the existing experience
-
-            val experience = TravelExperienceModel(
-                id = editingId!!, // means we are sure the ID is not null
-                title = title,
-                description = description,
-                country = country,
-                city = city,
-                type = type,
-                dateVisited = dateVisited,
-                rating = rating
-            )
-
-            AppData.experiences.update(experience) // Replace the saved details with the edited details
-
-            Toast.makeText(
-                this,
-                "Travel experience updated",
-                Toast.LENGTH_SHORT
+                e.message ?: "Please check the entered values.",
+                Toast.LENGTH_LONG
             ).show()
         }
-
-        finish()
     }
 }

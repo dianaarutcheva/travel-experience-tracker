@@ -3,4 +3,8 @@
     <string name="delete_experience_title">Delete this experience?</string>
     <string name="delete_experience_message">Remove %1$s from your travel experiences?</string>
     <string name="delete_experience_action">Delete</string>
+    <string name="experience_photo_preview">Experience photo preview</string>
+    <string name="choose_experience_photo">Choose photo</string>
+    <string name="latitude_hint">Latitude</string>
+    <string name="longitude_hint">Longitude</string>
 </resources>
