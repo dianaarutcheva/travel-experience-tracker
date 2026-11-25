@@ -1,3 +1,4 @@
+// Console version created in Lab 1, using a text menu to manage travel experiences
 package org.setu.travelexperiencetracker.main
 
 import org.setu.travelexperiencetracker.models.TravelExperienceMemStore

@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
 import timber.log.Timber
+import android.net.Uri
+import android.widget.ImageView
 
 interface OnExperienceListener {
     fun onExperienceClick(experience: TravelExperienceModel)
@@ -37,6 +39,8 @@ class TravelExperienceAdapter(
         val dateText: TextView = itemView.findViewById(R.id.dateText)
         val ratingText: TextView = itemView.findViewById(R.id.ratingText)
 
+        val experienceImage: ImageView =
+            itemView.findViewById(R.id.experienceImage)
     }
 
 
@@ -84,6 +88,13 @@ class TravelExperienceAdapter(
         holder.typeText.text = "Type: ${experience.type}"
         holder.dateText.text = "Date: ${experience.dateVisited}"
         holder.ratingText.text = "Rating: ${experience.rating}/5"
+        val imageUri = experience.imageUri?.let { Uri.parse(it) }
+
+        if (imageUri != null) {
+            holder.experienceImage.setImageURI(imageUri)
+        } else {
+            holder.experienceImage.setImageResource(android.R.drawable.ic_menu_gallery)
+        }
 
         holder.itemView.setOnClickListener {
             val selected = experiences.getOrNull(holder.bindingAdapterPosition)
