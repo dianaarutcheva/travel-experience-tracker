@@ -257,7 +257,14 @@
             android:hint="@string/longitude_hint"
             android:inputType="numberDecimal|numberSigned" />
 
-
+        <Button
+            android:id="@+id/buttonLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_location"
+            android:backgroundTint="#B32635"
+            android:textColor="#FFFFFF"
+            />
 
         <ImageView
             android:id="@+id/experienceImagePreview"
@@ -272,7 +279,10 @@
             android:id="@+id/pickExperienceImageButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_experience_photo" />
+            android:text="@string/choose_experience_photo"
+            android:backgroundTint="#B32635"
+            android:textColor="#FFFFFF"
+            />
 
 
         <!-- Save the new or edited experience. -->
