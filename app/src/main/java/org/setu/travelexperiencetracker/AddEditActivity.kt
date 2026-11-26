@@ -15,6 +15,7 @@ import timber.log.Timber
 import android.net.Uri
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import android.content.Intent
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -31,6 +32,8 @@ class AddEditActivity : AppCompatActivity() {
 
     private lateinit var latitudeInput: EditText
     private lateinit var longitudeInput: EditText
+    private var selectedLatitude: Double? = null
+    private var selectedLongitude: Double? = null
     private var editingId: Long? = null
 
 
@@ -68,7 +71,27 @@ class AddEditActivity : AppCompatActivity() {
         imagePreview = findViewById(R.id.experienceImagePreview)
         latitudeInput = findViewById(R.id.latitudeInput)
         longitudeInput = findViewById(R.id.longitudeInput)
+        val mapPicker =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val data = result.data ?: return@registerForActivityResult
+                    selectedLatitude = data.getDoubleExtra("latitude", 0.0)
+                    selectedLongitude = data.getDoubleExtra("longitude", 0.0)
 
+                    selectedLatitude?.let {
+                        latitudeInput.setText(it.toString())
+                    }
+
+                    selectedLongitude?.let {
+                        longitudeInput.setText(it.toString())
+                    }
+                }
+            }
+
+        findViewById<Button>(R.id.buttonLoc).setOnClickListener {
+            val mapIntent = Intent(this, MapPickerActivity::class.java)
+            mapPicker.launch(mapIntent)
+        }
         findViewById<Button>(R.id.pickExperienceImageButton).setOnClickListener {
             imagePicker.launch(arrayOf("image/*"))
         }

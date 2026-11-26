@@ -39,6 +39,7 @@ class TravelExperienceAdapter(
         val dateText: TextView = itemView.findViewById(R.id.dateText)
         val ratingText: TextView = itemView.findViewById(R.id.ratingText)
 
+        val locationText: TextView = itemView.findViewById(R.id.locationText)
         val experienceImage: ImageView =
             itemView.findViewById(R.id.experienceImage)
     }
@@ -88,6 +89,11 @@ class TravelExperienceAdapter(
         holder.typeText.text = "Type: ${experience.type}"
         holder.dateText.text = "Date: ${experience.dateVisited}"
         holder.ratingText.text = "Rating: ${experience.rating}/5"
+        holder.locationText.text = holder.itemView.context.getString(
+            R.string.experience_location,
+            experience.latitude,
+            experience.longitude
+        )
         val imageUri = experience.imageUri?.let { Uri.parse(it) }
 
         if (imageUri != null) {
