@@ -3,8 +3,9 @@ package org.setu.travelexperiencetracker.main
 
 import org.setu.travelexperiencetracker.models.TravelExperienceMemStore
 import org.setu.travelexperiencetracker.models.TravelExperienceModel
+import java.io.File
 
-val store = TravelExperienceMemStore()
+val store = TravelExperienceMemStore(File("console_experiences.json"))
 
 fun main() {
     println("=== Travel Experience Tracker Console App ===")

@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppData.initialize(this)
         if (Timber.forest().isEmpty()) {
             Timber.plant(Timber.DebugTree())
         }

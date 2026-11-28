@@ -3,9 +3,42 @@ package org.setu.travelexperiencetracker.models
 
 import java.util.concurrent.atomic.AtomicLong
 import timber.log.Timber
-class TravelExperienceMemStore {
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import java.io.File
+class TravelExperienceMemStore(private val file: File) {
     private val experiences = ArrayList<TravelExperienceModel>() // List that holds the travel experiences
     private val lastId = AtomicLong(0L) // Gives each new travel experience its own ID number (starts w 0)
+
+    private val gson = GsonBuilder()
+        .setPrettyPrinting()
+        .create()
+
+    init {
+        load()
+    }
+
+
+    private fun load() {
+        if (!file.exists()) return
+
+        val type = object : TypeToken<ArrayList<TravelExperienceModel>>() {}.type
+
+        val loaded: ArrayList<TravelExperienceModel> =
+            gson.fromJson(file.readText(), type) ?: arrayListOf()
+
+        experiences.clear()
+        experiences.addAll(loaded)
+
+        lastId.set(experiences.maxOfOrNull { it.id } ?: 0L)
+    }
+
+    private fun save() {
+        file.parentFile?.mkdirs()
+        file.writeText(gson.toJson(experiences))
+    }
+
+
 
 
 
@@ -19,6 +52,7 @@ class TravelExperienceMemStore {
         experience.validate()
         experience.id = lastId.incrementAndGet()
         experiences.add(experience)
+        save()
     }
 
 
@@ -38,6 +72,7 @@ class TravelExperienceMemStore {
             foundExperience.latitude = experience.latitude
             foundExperience.longitude = experience.longitude
             foundExperience.imageUri = experience.imageUri
+            save()
             true
         } else {
             false
@@ -51,6 +86,7 @@ class TravelExperienceMemStore {
         val foundExperience = findOne(id)
         return if (foundExperience != null) {
             experiences.remove(foundExperience)
+            save()
             true
         } else {
             false
